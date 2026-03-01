@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articles — Encryptid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inconsolata:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #0E0C22;
+      --bg-card:   #15122E;
+      --blue:      #3355EE;
+      --blue-dim:  #1F3399;
+      --purple:    #6633AA;
+      --purple-dim:#3D1F66;
+      --white:     #E8E8FF;
+      --dim:       #8888BB;
+      --border:    #2A2550;
+      --gold:      #FFD700;
+      --green:     #00FF88;
+      --red:       #FF3355;
+      --orange:    #FF8833;
+      --grey:      #555577;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    #starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .site-wrap { position: relative; z-index: 2; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 2px solid var(--border);
+      background: rgba(14,12,34,0.92);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-pixel { width: 40px; height: 32px; position: relative; flex-shrink: 0; }
+    .logo-pixel::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 40px; height: 26px;
+      background: var(--blue);
+      box-shadow: -2px -2px 0 var(--purple-dim), 2px 2px 0 var(--blue-dim), inset -2px -2px 0 var(--blue-dim);
+    }
+    .logo-pixel::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 2px;
+      width: 16px; height: 8px;
+      background: var(--blue);
+      clip-path: polygon(0 100%, 0 40%, 30% 0, 100% 0, 100% 100%);
+    }
+    .logo-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 14px;
+      color: var(--white);
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(51,85,238,0.8), 2px 2px 0 var(--purple-dim);
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+      padding: 4px 0;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--blue);
+      transition: width 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); text-shadow: 0 0 10px rgba(51,85,238,0.9); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--white); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-admin {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--purple);
+      text-decoration: none;
+      border: 1px solid var(--purple-dim);
+      padding: 7px 12px;
+      transition: all 0.2s;
+    }
+    .nav-admin:hover { background: var(--purple-dim); color: var(--white); box-shadow: 0 0 12px rgba(102,51,170,0.6); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 72px 48px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      animation: fadeUp 0.8s ease both;
+    }
+    .page-eyebrow {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--purple);
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(18px, 3vw, 34px);
+      line-height: 1.6;
+      color: var(--white);
+      text-shadow: 0 0 20px rgba(51,85,238,0.6), 4px 4px 0 var(--purple-dim);
+    }
+    .page-title span { color: var(--blue); }
+    .page-divider {
+      width: 80px; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--purple), transparent);
+      margin-top: 24px;
+    }
+
+    /* ── CONTENT ── */
+    .content-area {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--white);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    .section-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .article-count {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--blue);
+      border: 1px solid var(--blue-dim);
+      padding: 4px 8px;
+      white-space: nowrap;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .filter-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--grey);
+      letter-spacing: 1px;
+      margin-right: 4px;
+    }
+
+    .filter-btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--dim);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .filter-btn.active {
+      background: var(--blue-dim);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    /* category colour overrides */
+    .filter-btn[data-cat="cryptids"].active      { background: rgba(102,51,170,0.3); border-color: var(--purple); color: var(--white); }
+    .filter-btn[data-cat="conspiracies"].active  { background: rgba(255,136,51,0.15); border-color: var(--orange); color: var(--orange); }
+    .filter-btn[data-cat="phenomena"].active     { background: rgba(0,255,136,0.1); border-color: var(--green); color: var(--green); }
+
+    /* ── ARTICLE LIST ── */
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .article-row {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      align-items: stretch;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .article-row:hover {
+      border-color: var(--blue);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--blue-dim);
+      z-index: 2;
+    }
+
+    /* category colour accent on left edge */
+    .article-row[data-cat="cryptids"]     { border-left: 4px solid var(--purple); }
+    .article-row[data-cat="conspiracies"] { border-left: 4px solid var(--orange); }
+    .article-row[data-cat="phenomena"]    { border-left: 4px solid var(--green); }
+
+    .article-row:hover[data-cat="cryptids"]     { border-color: var(--purple); box-shadow: 5px 5px 0 var(--purple-dim); }
+    .article-row:hover[data-cat="conspiracies"] { border-color: var(--orange); box-shadow: 5px 5px 0 rgba(255,136,51,0.3); }
+    .article-row:hover[data-cat="phenomena"]    { border-color: var(--green);  box-shadow: 5px 5px 0 rgba(0,255,136,0.2); }
+
+    /* stagger animation delays */
+    .article-row:nth-child(1)  { animation-delay: 0.05s; }
+    .article-row:nth-child(2)  { animation-delay: 0.10s; }
+    .article-row:nth-child(3)  { animation-delay: 0.15s; }
+    .article-row:nth-child(4)  { animation-delay: 0.20s; }
+    .article-row:nth-child(5)  { animation-delay: 0.25s; }
+    .article-row:nth-child(6)  { animation-delay: 0.30s; }
+
+    /* ── LEFT: IMAGE THUMBNAIL ── */
+    .article-thumb {
+      width: 180px;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      flex-shrink: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          rgba(51,85,238,0.04) 0px,
+          rgba(51,85,238,0.04) 2px,
+          transparent 2px,
+          transparent 10px
+        ),
+        linear-gradient(160deg, #0a0820, #160e35);
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── MIDDLE: BODY ── */
+    .article-body {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .article-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .article-category {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      letter-spacing: 2px;
+      padding: 4px 8px;
+      border: 1px solid;
+    }
+
+    .cat-cryptids     { color: var(--purple); border-color: var(--purple-dim); }
+    .cat-conspiracies { color: var(--orange); border-color: rgba(255,136,51,0.4); }
+    .cat-phenomena    { color: var(--green);  border-color: rgba(0,255,136,0.3); }
+
+    .article-date {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: var(--grey);
+      letter-spacing: 1px;
+    }
+
+    .article-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--white);
+      line-height: 1.9;
+      letter-spacing: 0.5px;
+    }
+
+    .article-excerpt {
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      color: var(--dim);
+      line-height: 1.5;
+      max-width: 680px;
+    }
+
+    /* ── RIGHT: RANKING PANEL ── */
+    .article-ranking {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 28px 32px;
+      border-left: 1px solid var(--border);
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .rank-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .rank-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 6px;
+      color: var(--grey);
+      letter-spacing: 1px;
+    }
+
+    .pip-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .pip {
+      width: 9px; height: 9px;
+      background: var(--border);
+      flex-shrink: 0;
+      image-rendering: pixelated;
+    }
+    .pip.filled { background: var(--blue); box-shadow: 0 0 4px rgba(51,85,238,0.6); }
+
+    .rank-divider-h {
+      width: 48px; height: 1px;
+      background: var(--border);
+    }
+
+    .overall-badge {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 20px;
+      width: 48px; height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid;
+    }
+
+    .badge-s { color: var(--gold);   border-color: var(--gold);   box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+    .badge-a { color: var(--green);  border-color: var(--green);  box-shadow: 0 0 10px rgba(0,255,136,0.3); }
+    .badge-b { color: var(--blue);   border-color: var(--blue);   box-shadow: 0 0 10px rgba(51,85,238,0.3); }
+    .badge-c { color: var(--white);  border-color: var(--dim); }
+    .badge-d { color: var(--orange); border-color: var(--orange); box-shadow: 0 0 10px rgba(255,136,51,0.3); }
+    .badge-u { color: var(--red);    border-color: var(--red);    box-shadow: 0 0 10px rgba(255,51,85,0.3); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 80px 40px;
+      border: 2px dashed var(--border);
+      background: var(--bg-card);
+    }
+
+    .empty-state.visible { display: block; }
+
+    .empty-state p {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--grey);
+      line-height: 2;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,8,24,0.8);
+    }
+    .footer-logo {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--white);
+      text-shadow: 0 0 10px rgba(51,85,238,0.6);
+    }
+    .footer-copy { font-family: 'VT323', monospace; font-size: 16px; color: var(--grey); }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--blue); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-dim); border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+    ::selection { background: var(--blue); color: var(--white); }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="site-wrap">
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      <div class="logo-pixel"></div>
+      <span class="logo-text">ENCRYPTID</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/about.html">ABOUT</a></li>
+      <li><a href="/ranking.html">RANKING</a></li>
+      <li><a href="/methodology.html">METHODOLOGY</a></li>
+      <li><a href="/articles/" class="active">ARTICLES</a></li>
+    </ul>
+    <a href="/admin/" class="nav-admin">▌ ADMIN</a>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <header class="page-header">
+    <p class="page-eyebrow">// FILE: ARTICLES — CLEARANCE LEVEL: PUBLIC</p>
+    <h1 class="page-title">THE <span>ARCHIVE</span></h1>
+    <div class="page-divider"></div>
+  </header>
+
+  <!-- ── CONTENT ── -->
+  <main class="content-area">
+
+    <div class="section-header">
+      <span class="section-title">ALL FILES</span>
+      <div class="section-line"></div>
+      <span class="article-count" id="article-count">3 ENTRIES</span>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <span class="filter-label">FILTER:</span>
+      <button class="filter-btn active" data-cat="all">ALL</button>
+      <button class="filter-btn" data-cat="cryptids">CRYPTIDS</button>
+      <button class="filter-btn" data-cat="conspiracies">CONSPIRACIES</button>
+      <button class="filter-btn" data-cat="phenomena">PHENOMENA</button>
+    </div>
+
+    <!-- Article List -->
+    <div class="article-list" id="article-list">
+
+      <!-- ARTICLE 1 -->
+      <a class="article-row" href="/articles/mothman.html" data-cat="cryptids">
+        <div class="article-thumb">🦋</div>
+        <div class="article-body">
+          <div class="article-meta-top">
+            <span class="article-category cat-cryptids">// CRYPTIDS</span>
+            <span class="article-date">2025.11.17</span>
+          </div>
+          <h2 class="article-title">THE MOTHMAN OF POINT PLEASANT</h2>
+          <p class="article-excerpt">Between 1966 and 1967, over 100 witnesses in Point Pleasant, West Virginia reported encounters with a winged humanoid creature before the Silver Bridge collapse claimed 46 lives. The sheer volume of corroborating testimony makes this one of the most compelling cryptid cases on record.</p>
+        </div>
+        <div class="article-ranking">
+          <div class="rank-row">
+            <span class="rank-label">VERACITY</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div>
+            </div>
+          </div>
+          <div class="rank-row">
+            <span class="rank-label">SUPERNATURE</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="rank-divider-h"></div>
+          <div class="overall-badge badge-s">S</div>
+        </div>
+      </a>
+
+      <!-- ARTICLE 2 -->
+      <a class="article-row" href="/articles/taos-hum.html" data-cat="phenomena">
+        <div class="article-thumb">🌀</div>
+        <div class="article-body">
+          <div class="article-meta-top">
+            <span class="article-category cat-phenomena">// PHENOMENA</span>
+            <span class="article-date">2025.10.02</span>
+          </div>
+          <h2 class="article-title">THE TAOS HUM — NEW MEXICO</h2>
+          <p class="article-excerpt">Since the 1990s a persistent low-frequency hum has been reported by roughly 2% of Taos residents. Extensive scientific investigation has failed to identify a definitive source, leaving the phenomenon unresolved and its sufferers largely without answers.</p>
+        </div>
+        <div class="article-ranking">
+          <div class="rank-row">
+            <span class="rank-label">VERACITY</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="rank-row">
+            <span class="rank-label">SUPERNATURE</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div><div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="rank-divider-h"></div>
+          <div class="overall-badge badge-a">A</div>
+        </div>
+      </a>
+
+      <!-- ARTICLE 3 -->
+      <a class="article-row" href="/articles/majestic-12.html" data-cat="conspiracies">
+        <div class="article-thumb">📁</div>
+        <div class="article-body">
+          <div class="article-meta-top">
+            <span class="article-category cat-conspiracies">// CONSPIRACIES</span>
+            <span class="article-date">2025.11.03</span>
+          </div>
+          <h2 class="article-title">OPERATION MAJESTIC 12</h2>
+          <p class="article-excerpt">A purported secret committee of scientists, military leaders, and government officials allegedly formed to recover and investigate alien spacecraft. The documentary evidence remains contested, with key documents widely considered to be forgeries by mainstream researchers.</p>
+        </div>
+        <div class="article-ranking">
+          <div class="rank-row">
+            <span class="rank-label">VERACITY</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip"></div><div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="rank-row">
+            <span class="rank-label">SUPERNATURE</span>
+            <div class="pip-row">
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div><div class="pip filled"></div>
+              <div class="pip filled"></div>
+            </div>
+          </div>
+          <div class="rank-divider-h"></div>
+          <div class="overall-badge badge-c">C</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Empty state (shown when filter has no results) -->
+    <div class="empty-state" id="empty-state">
+      <p>// NO FILES FOUND IN THIS CATEGORY</p>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="footer-logo">ENCRYPTID</span>
+    <span class="footer-copy">© 2025 Encryptid. All files classified until proven otherwise.</span>
+    <ul class="footer-links">
+      <li><a href="/about.html">ABOUT</a></li>
+      <li><a href="/contact.html">CONTACT</a></li>
+      <li><a href="/ranking.html">RANKINGS</a></li>
+    </ul>
+  </footer>
+
+</div>
+
+<script>
+  /* ── STAR FIELD ── */
+  const canvas = document.getElementById('starfield');
+  const ctx    = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const stars = Array.from({ length: 70 }, () => {
+    const flicker = Math.random() < 0.14;
+    return {
+      x: Math.random(), y: Math.random(),
+      size: Math.random() < 0.15 ? 2 : 1,
+      opacity: 0.4 + Math.random() * 0.6,
+      flicker,
+      fTarget:  flicker ? 0.5 + Math.random() * 0.5 : null,
+      fCurrent: flicker ? 0.4 + Math.random() * 0.6 : null,
+      fSpeed:   flicker ? 0.002 + Math.random() * 0.004 : null,
+    };
+  });
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      let alpha = s.opacity;
+      if (s.flicker) {
+        const diff = s.fTarget - s.fCurrent;
+        s.fCurrent += diff * s.fSpeed * 60 * (1/60);
+        if (Math.abs(diff) < 0.01) s.fTarget = 0.5 + Math.random() * 0.5;
+        alpha = s.fCurrent;
+      }
+      ctx.fillStyle = `rgba(232, 232, 255, ${alpha})`;
+      ctx.fillRect(Math.floor(s.x * canvas.width), Math.floor(s.y * canvas.height), s.size, s.size);
+    }
+    requestAnimationFrame(drawStars);
+  }
+  requestAnimationFrame(drawStars);
+
+  /* ── CATEGORY FILTER ── */
+  const filterBtns  = document.querySelectorAll('.filter-btn');
+  const articleRows = document.querySelectorAll('.article-row');
+  const countEl     = document.getElementById('article-count');
+  const emptyState  = document.getElementById('empty-state');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cat = btn.dataset.cat;
+      let visible = 0;
+
+      articleRows.forEach(row => {
+        const match = cat === 'all' || row.dataset.cat === cat;
+        row.style.display = match ? 'grid' : 'none';
+        if (match) visible++;
+      });
+
+      countEl.textContent = visible + (visible === 1 ? ' ENTRY' : ' ENTRIES');
+      emptyState.classList.toggle('visible', visible === 0);
+    });
+  });
+</script>
+
+</body>
+</html>
