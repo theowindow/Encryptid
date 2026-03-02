@@ -2,7 +2,7 @@ backend:
   name: github
   repo: theowindow/Encryptid
   branch: main
-
+  site_domain: www.encryptid.com
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
