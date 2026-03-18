@@ -12,17 +12,17 @@ overall: D
 
 #### **Preconception**
 
-I have had one (Extremely questionable) experience in my life that made me question the existence of the undead. As a teenager, I was returning home from a meal with some friends when we passed by a local woodland area. It was beginning to get dark and as teenagers do, my friends and I were attempting to scare each other by making scary noises, talking about experiences with the supernatural, and playing youtube videos on our phones of creepypastas that had captured our imaginations that day. We were being particularly loud and obnoxious when all of a sudden, we heard a noise from the gloom of the woods that made all of us freeze without hesitation. 
+I have had one (Extremely questionable) experience in my life that made me question the existence of the undead. As a teenager, I was returning home from a meal with some friends when we passed by a local woodland area. It was beginning to get dark and as teenagers do, my friends and I were attempting to scare each other by making scary noises, talking about experiences with the supernatural, and playing youtube videos on our phones of creepypastas that had captured our imaginations that day. We were being particularly loud and obnoxious when all of a sudden, we heard a noise from the gloom of the woods that made all of us freeze without hesitation.
 
 “_Shhh.” _Was all that we heard.
 
-Nothing particularly bone-chilling on the surface of it. There’s every likelihood that a nearby resident decided to shut the local teens up by spooking them in the dark of the forest. It could even have been the noise of some wild animal shunting around the treeline. Nonetheless, something about the way my blood turned cold when hearing that noise has always left the door just ever so slightly ajar on my belief that some spirits might be waiting just on the cusp of the sweet hereafter, and no amount of skepticism on my part has ever been able to close that door all the way. 
+Nothing particularly bone-chilling on the surface of it. There’s every likelihood that a nearby resident decided to shut the local teens up by spooking them in the dark of the forest. It could even have been the noise of some wild animal shunting around the treeline. Nonetheless, something about the way my blood turned cold when hearing that noise has always left the door just ever so slightly ajar on my belief that some spirits might be waiting just on the cusp of the sweet hereafter, and no amount of skepticism on my part has ever been able to close that door all the way.
 
 #### **Research**
 
-When scouring the internet about the topic of ghosts, there was one UK city which came up more than any other when it comes to hauntings. York has attained a fearsome reputation as the most haunted city in the world, according to a a litany of tourist sites (**Visit York**, 2025). Much of this stems from one specific claim from a group known as the Ghost Research Foundation International (GRFI) who are purported to have conducted a study in which it was found to have a whopping total of 504 hauntings. 
+When scouring the internet about the topic of ghosts, there was one UK city which came up more than any other when it comes to hauntings. York has attained a fearsome reputation as the most haunted city in the world, according to a a litany of tourist sites (**Visit York**, 2025). Much of this stems from one specific claim from a group known as the Ghost Research Foundation International (GRFI) who are purported to have conducted a study in which it was found to have a whopping total of 504 hauntings.
 
-Only there was one problem. This ‘GFRI’ does not appear to exist. 
+Only there was one problem. This ‘GFRI’ does not appear to exist.
 
 When researching the name of this foundation, the only references I could find to it’s existence pertained specifically to its relationship to York, and none of the articles provided any source information for this amorphous organisation. It would appear that reporters have been playing ‘pass the parcel’ with this sliver of misinformation, which I have managed to trace back to a 2014 article by the BBC’s Lisa Crawford (Crawford, 2008).  Though the editorial guidelines of the BBC requires that its reporters strive to report truthfully and clearly attribute sources, this instance is a prime example of the importance of checking one's sources even when reading from reputable news sites.
 
@@ -32,7 +32,7 @@ So, is York _really_ the world's most haunted city? Probably not. Nonetheless, I
 
 Phenomena like this isn’t unheard of in any city. Judy’s account is one of many similar stories I heard from friends and family growing up, and when I pressed further Judy conceded that she often attributed her sightings to being tired.
 
-But modern tales of apparitions are far from the only accounts we have on the subject. In 1953, an 18 year old apprentice named Harry Martindale was carrying out some restoration work on the Treasurer’s House when he described a procession of roman soldiers in the cellar of the treasurers house. 
+But modern tales of apparitions are far from the only accounts we have on the subject. In 1953, an 18 year old apprentice named Harry Martindale was carrying out some restoration work on the Treasurer’s House when he described a procession of roman soldiers in the cellar of the treasurers house.
 
 If you’re anything like me, you just rolled your eyes a little upon hearing that description. An overworked 18 year old seeing visions in a dusky cellar seemed an implausible source to me, but there was more to this account than met the eye.
 
@@ -40,7 +40,7 @@ In multiple interviews, Martindale has described the rounded shields that these 
 
 Roman shields were thought for a long time to have been exclusively in the ‘Scutum’ shape, which is a rectangular, semi-cylindrical version of roman shields that was used with great success during the height of the roman empire. Thus, when Martindale gave his account of these shields as having been rounded, his perception of these spiritual sightings was widely discounted. Only in more recent years, discoveries at Hadrians Wall uncovered that auxiliary soldiers (Like the kind that would’ve been stationed in York during it’s occupation by the Roman Empire) would have worn rounded shields.
 
-Here’s the issue. 
+Here’s the issue.
 
 The earliest account we have of Martindale’s story is from an interview with John Mitchell over 50 years ago, in which he makes no mention of a description of the soldiers' uniforms from the snippets of the interview shown. In fact, this was in fact the only interview that Martindale gave until decades later in the 1970s when he began recounting the story to visitors of the Treasurer's House.
 
@@ -48,7 +48,7 @@ Furthermore, the supposed dig upon Hadrian's Wall that elevated Harry’s credib
 
 Thus, I was led to the conclusion: The stories of York’s haunted history was being largely fabricated.
 
-But all of this information still left me with questions. _Why _was so much effort being put into maintaining this spooky repute? 
+But all of this information still left me with questions. _Why _was so much effort being put into maintaining this spooky repute?
 
 Tourism in York contributed £2.01 billion to the UK economy in 2024, an increase of 5.4% from the year before (Make it York, no date). 34% of this was spent on the retail sector, and taking a short walk around York, it becomes apparent who benefits from all of the hype.
 
@@ -67,7 +67,7 @@ The York Ghost Merchants are a prime example of how the mythology around York’
 
 And it’s not just retail spending, tourist spots naturally attract a generous income for the hospitality industry. Yorks housing market has long been marred by the short-term let industry, with York Central’s MP Rachel Maskell having even raised the issue in Parliament during a speech in 2023. Maskell has proposed allowing local councils to impose a liscence for anyone wishing to turn domestic residences into short-term accommodation- a proposition that would purportedly make a significant improvement on the shortage of available homes without entirely tanking the income that these industries undoubtedly bring.
 
-So while an offhand comment about phony ghost stories might _appear _innocuous, this misreporting has had significant effects on the York economy. 
+So while an offhand comment about phony ghost stories might _appear _innocuous, this misreporting has had significant effects on the York economy.
 
 #### **Verdict**
 
@@ -75,7 +75,7 @@ So, do I think York is especially haunted? Not really. Evidence of paranormal ac
 
 Ghosts are a recurrent theme in both literature and theological works. Belief in the undead are widespread among a variety of cultures and religions and there is even some unexplained scientific basis for the concept of a soul. Thus, the idea doesn’t quite hit the maximum level of supernature for me. Despite there being much left to the imagination when it comes to ghosts, the concept is not so far outside the realm of possibility that my faith couldn’t be shaken by some first hand experiences.
 
-The difficulty I had in deciding the veracity of this claim stemmed from the fact that I don’t necessarily _disbelieve_ in the accounts of the witnesses. It’s more that I disbelieve the concept of human perception. In all the interviews I reviewed or conducted, extenuating circumstances cast notable doubt on whether or not there was a true basis for what the witnesses saw. 
+The difficulty I had in deciding the veracity of this claim stemmed from the fact that I don’t necessarily _disbelieve_ in the accounts of the witnesses. It’s more that I disbelieve the concept of human perception. In all the interviews I reviewed or conducted, extenuating circumstances cast notable doubt on whether or not there was a true basis for what the witnesses saw.
 
 As my research progressed, it became apparent to me that the idea of these spectral sightings were being grossly misrepresented for the sake of propping up Yorks tourist economy. And further, given the result of this claim has had such consequences on the housing market, I am forced to give this claim a D for it’s overall scoring.
 
@@ -86,7 +86,7 @@ Most of the research I’m able to garner on this topic comes from either firsth
 **BBC North Yorkshire** (no date) _York: The most haunted city._ Available at: [https://www.bbc.co.uk/northyorkshire/uncovered/ghost/most_haunted.shtml](https://www.bbc.co.uk/northyorkshire/uncovered/ghost/most_haunted.shtml) (Accessed: 1 March 2026).
 Brown, Ciaran._ "Ciaran Brown Meets Harry Martindale."_ _ciaranbrown.com_. Accessed March 2026. [http://www.ciaranbrown.com/martindale.html](http://www.ciaranbrown.com/martindale.html)
 
-**Crawford, L. **(2008)_ 'Haunted York',_ BBC York & North Yorkshire, 29 October. Available at: https://www.bbc.co.uk/northyorkshire/content/articles/2008/10/29/haunted_york_feature.shtml (Accessed: 8 March 2026).
+\*\*Crawford, L. \*\*(2008)_ 'Haunted York',_ BBC York & North Yorkshire, 29 October. Available at: https://www.bbc.co.uk/northyorkshire/content/articles/2008/10/29/haunted_york_feature.shtml (Accessed: 8 March 2026).
 
 **Edwards, R.** (2025) 'My sons work in this city - but they can't afford to live here' BBC News, 13 July, available at: [https://www.bbc.co.uk/news/articles/c9vrjyvzym2o](https://www.bbc.co.uk/news/articles/c9vrjyvzym2o) (accessed: 5 March 2026)
 
