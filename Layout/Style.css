@@ -1,0 +1,456 @@
+/* ============================================================
+   ENCRYPTID.CO.UK — SHARED STYLESHEET
+   ============================================================
+   HOW TO EDIT:
+   - Colors are defined as variables at the top of this file
+   - Change --green to change all accent/heading colours
+   - Change --text to change all body text colour
+   - Font sizes, spacing etc. are labelled with comments
+   ============================================================ */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&family=Inconsolata:wght@400;700&display=swap');
+
+/* --- CSS Variables (Site Colour Scheme) --- */
+:root {
+  --bg:       #000000;       /* Background colour */
+  --green:    #3c7a18;       /* Headings and accents */
+  --green-bright: #5db82a;   /* Hover / glow colour */
+  --text:     #E8E8FF;       /* Body text */
+  --text-dim: #9999bb;       /* Subdued / meta text */
+  --border:   #1e4a09;       /* Border colour */
+  --card-bg:  #080e05;       /* Article card backgrounds */
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'VT323', 'Inconsolata', monospace;
+  font-size: 1.3rem;      /* Body text size — increase if you want larger text */
+  line-height: 1.75;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- Star Field Canvas (sits behind everything) --- */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- CRT Scanline Overlay --- */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+}
+
+/* --- Page Wrapper (keeps content above canvas) --- */
+#page-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;         /* Max content width — adjust if you want wider layout */
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: relative;
+  z-index: 10;
+  border-bottom: 2px solid var(--border);
+  padding: 1rem 0;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+}
+
+/* Site logo in nav */
+nav .nav-logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.85rem;
+  color: var(--green);
+  text-decoration: none;
+  text-shadow: 0 0 10px var(--green), 0 0 20px rgba(60,122,24,0.4);
+  margin-right: auto;   /* Pushes nav links to the right */
+  letter-spacing: 2px;
+}
+
+/* Nav links */
+nav a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;    /* Nav link size */
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s, text-shadow 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--green-bright);
+  border-color: var(--border);
+  text-shadow: 0 0 8px var(--green-bright);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+/* Main page headings (h1) */
+h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.4rem;      /* Page title size */
+  color: var(--green);
+  text-shadow: 0 0 14px var(--green), 0 0 30px rgba(60,122,24,0.3);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Section headings (h2) */
+h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.85rem;     /* Section heading size */
+  color: var(--green);
+  text-shadow: 0 0 8px rgba(60,122,24,0.6);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 1px;
+}
+
+/* Sub-headings (h3) */
+h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;     /* Sub-heading size */
+  color: var(--green-bright);
+  margin: 2rem 0 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;      /* Body text size */
+}
+
+/* Bold text */
+strong {
+  color: var(--green-bright);
+  font-weight: bold;
+}
+
+/* Links inside content */
+.content a {
+  color: var(--green-bright);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.content a:hover {
+  color: #88ff44;
+  text-shadow: 0 0 6px var(--green-bright);
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ============================================================
+   ARTICLE CARDS (used on homepage & articles listing page)
+   ============================================================ */
+.article-card {
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.article-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(60,122,24,0.25), inset 0 0 20px rgba(60,122,24,0.04);
+}
+
+/* Decorative corner pixel on cards */
+.article-card::before {
+  content: '▶';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.5rem;
+  color: var(--green);
+  opacity: 0.5;
+}
+
+.article-card .card-date {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+  font-family: 'Inconsolata', monospace;
+}
+
+.article-card h2 {
+  font-size: 0.7rem;
+  margin: 0.5rem 0 0.75rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+.article-card h3 {
+  font-size: 0.55rem;
+  margin: 0 0 0.75rem;
+  color: var(--text-dim);
+}
+
+.article-card p {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+/* "Read More" button on cards */
+.read-more {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--green-bright);
+  text-decoration: none;
+  border: 1px solid var(--green);
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.read-more:hover {
+  background: var(--green);
+  color: var(--bg);
+  box-shadow: 0 0 10px var(--green);
+}
+
+/* ============================================================
+   RANKINGS DISPLAY (used on rankings page & article verdicts)
+   ============================================================ */
+.ranking-score {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  border: 1px solid var(--green);
+  padding: 0.4rem 0.75rem;
+  margin: 0.25rem 0.25rem 0.25rem 0;
+  color: var(--green-bright);
+  background: var(--card-bg);
+}
+
+.overall-rank {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2rem;
+  color: var(--green);
+  text-shadow: 0 0 20px var(--green), 0 0 40px rgba(60,122,24,0.4);
+  display: block;
+  margin: 1rem 0 0.5rem;
+}
+
+.verdict-box {
+  border: 2px solid var(--green);
+  background: var(--card-bg);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 0 20px rgba(60,122,24,0.15);
+}
+
+.verdict-box h2 {
+  border-bottom: 1px solid var(--border);
+  margin-top: 0;
+}
+
+/* ============================================================
+   TABLES (used in York article)
+   ============================================================ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 1.05rem;
+  font-family: 'Inconsolata', monospace;
+  overflow-x: auto;
+  display: block;
+}
+
+.data-table th {
+  background: var(--green);
+  color: var(--bg);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  padding: 0.6rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.data-table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  color: var(--text);
+}
+
+.data-table tr:nth-child(even) td {
+  background: var(--card-bg);
+}
+
+.data-table tr:hover td {
+  background: rgba(60,122,24,0.08);
+}
+
+/* ============================================================
+   BIBLIOGRAPHY SECTION
+   ============================================================ */
+.bibliography {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+}
+
+.bibliography h2 {
+  font-size: 0.65rem;
+}
+
+.bibliography ol {
+  padding-left: 1.5rem;
+}
+
+.bibliography li {
+  font-size: 1.05rem;
+  font-family: 'Inconsolata', monospace;
+  margin-bottom: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.bibliography a {
+  color: var(--green-bright);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+/* ============================================================
+   DISCLAIMER BOX (used on articles page)
+   ============================================================ */
+.disclaimer {
+  border: 1px dashed var(--green);
+  background: rgba(60,122,24,0.05);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  font-family: 'Inconsolata', monospace;
+  color: var(--text-dim);
+}
+
+.disclaimer strong {
+  color: var(--green-bright);
+}
+
+/* ============================================================
+   SIGN-OFF (Keep it Cryptid)
+   ============================================================ */
+.signoff {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: var(--green);
+  text-align: right;
+  margin-top: 3rem;
+  letter-spacing: 2px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-top: 4rem;
+}
+
+footer a {
+  color: var(--green-bright);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-shadow: 0 0 6px var(--green-bright);
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.meta-tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.85rem;
+  color: var(--green-bright);
+  opacity: 0.7;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.text-center { text-align: center; }
+.text-dim { color: var(--text-dim); }
+.mb-0 { margin-bottom: 0; }
+
+/* ============================================================
+   RESPONSIVE — narrow screens
+   ============================================================ */
+@media (max-width: 600px) {
+  h1 { font-size: 0.95rem; }
+  h2 { font-size: 0.65rem; }
+  nav a { font-size: 0.45rem; }
+  body { font-size: 1.1rem; }
+  #page-wrapper { padding: 0 1rem 3rem; }
+}
