@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rankings — Encryptid</title>
+  <meta name="description" content="The Encryptid ranking system explained — how claims are rated for veracity, supernature, and overall credibility." />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ---- Rank Grade Cards ---- */
+    .grade-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .grade-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      padding: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .grade-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 0 10px rgba(60,122,24,0.2);
+    }
+
+    .grade-letter {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 2rem;
+      color: var(--green);
+      text-shadow: 0 0 12px rgba(60,122,24,0.5);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .grade-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .grade-desc {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* ---- Score bars ---- */
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .score-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--green);
+      min-width: 110px;
+    }
+
+    .score-bar {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      position: relative;
+      min-width: 100px;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    .score-range {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="starfield"></canvas>
+
+  <div id="page-wrapper">
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav>
+      <a href="index.html" class="nav-logo">ENCRYPTID</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rankings.html" class="active">Rankings</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="articles.html">Articles</a>
+    </nav>
+
+    <!-- ===================== PAGE CONTENT ===================== -->
+    <div class="content">
+
+      <span class="meta-tag">[ RANKING SYSTEM ]</span>
+      <h1>The Ranking System, Explained</h1>
+
+      <p>
+        I will always attempt to be honest and accountable when sharing my opinion on the veracity
+        of the claims on this website, and anything ranked higher than a <strong>5/10</strong>
+        indicates that I, the writer, believe in the theory myself.
+      </p>
+
+      <p>
+        This ranking system is <strong>not</strong> to be taken as an absolute measure for which
+        the reader should base their own beliefs. It is intended to be a guide with which you can
+        decide for yourself whether or not you believe in the theories posited on Encryptid.
+      </p>
+
+      <hr />
+
+      <!-- ---- RANKING CATEGORIES ---- -->
+      <h2>Ranking Categories</h2>
+
+      <!-- Veracity -->
+      <h3>Veracity</h3>
+      <p>
+        How much of the claim relies on fact? How many reliable sources can back it up?
+      </p>
+      <div class="score-row">
+        <span class="score-label">VERACITY</span>
+        <div class="score-bar">
+          <div class="score-bar-fill" style="width: 100%;"></div>
+        </div>
+        <span class="score-range">Rated 1 – 5</span>
+      </div>
+
+      <!-- Supernature -->
+      <h3>Supernature</h3>
+      <p>
+        Does the claim contain elements that can't be explained by science? Is it beyond our modern
+        understanding of the laws of nature?
+      </p>
+      <div class="score-row">
+        <span class="score-label">SUPERNATURE</span>
+        <div class="score-bar">
+          <div class="score-bar-fill" style="width: 100%;"></div>
+        </div>
+        <span class="score-range">Rated 1 – 5</span>
+      </div>
+
+      <p style="font-size:1.05rem; font-family:'Inconsolata',monospace; color:var(--text-dim); border-left: 3px solid var(--border); padding-left: 1rem; margin-top: 0.5rem;">
+        * It should be noted, the Supernature ranking does not in and of itself denote that the claim
+        should be received with any less veracity. Scientific discoveries are borne out of the
+        observation of natural phenomena, and just because something cannot yet be explained by
+        science does not mean that it hasn't occurred.
+      </p>
+
+      <hr />
+
+      <!-- ---- OVERALL GRADES ---- -->
+      <h2>Overall Grade</h2>
+      <p>
+        The summary rank on how accurate the writer finds these claims.
+      </p>
+
+      <!--
+        HOW TO ADD A NEW GRADE:
+        Copy one .grade-card block below, paste it inside .grade-grid,
+        and update the letter, label, and description.
+      -->
+      <div class="grade-grid">
+
+        <div class="grade-card">
+          <span class="grade-letter">S</span>
+          <span class="grade-label">OUTSTANDING</span>
+          <p class="grade-desc">
+            Significant evidentiary support. The author considers this claim to be ostensibly true.
+          </p>
+        </div>
+
+        <div class="grade-card">
+          <span class="grade-letter">A</span>
+          <span class="grade-label">ACCEPTABLE</span>
+          <p class="grade-desc">
+            Solid evidence exists, but minor gaps in information mean that further questions still
+            need to be asked.
+          </p>
+        </div>
+
+        <div class="grade-card">
+          <span class="grade-letter">B</span>
+          <span class="grade-label">STANDARD</span>
+          <p class="grade-desc">
+            Evidence is present, but multiple significant flaws and gaps mean that it should not
+            be considered reliable.
+          </p>
+        </div>
+
+        <div class="grade-card">
+          <span class="grade-letter">C</span>
+          <span class="grade-label">AVERAGE</span>
+          <p class="grade-desc">
+            Unsubstantiated evidence holds this claim together by a thread, and few verifiable
+            sources are able to maintain it.
+          </p>
+        </div>
+
+        <div class="grade-card">
+          <span class="grade-letter">D</span>
+          <span class="grade-label">WEAK</span>
+          <p class="grade-desc">
+            Claim is significantly stymied by disinformation and hoaxes, whether intentionally
+            or unintentionally.
+          </p>
+        </div>
+
+        <div class="grade-card">
+          <span class="grade-letter">U</span>
+          <span class="grade-label">UNCLASSIFIED</span>
+          <p class="grade-desc">
+            Actively and intentionally harmful claims that are deliberately made to stir up
+            civil unrest.
+          </p>
+        </div>
+
+      </div><!-- end .grade-grid -->
+
+    </div><!-- end .content -->
+
+  </div><!-- end #page-wrapper -->
+
+  <footer>
+    <p>
+      &copy; 2026 Encryptid &mdash; <a href="https://encryptid.co.uk">encryptid.co.uk</a>
+      &nbsp;|&nbsp; Keep it cryptid.
+    </p>
+  </footer>
+
+  <script src="js/starfield.js"></script>
+</body>
+</html>
