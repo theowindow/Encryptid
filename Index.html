@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encryptid — Cryptids, Conspiracies & Supernatural Phenomena</title>
+  <meta name="description" content="Cryptids, conspiracies, and other supernatural phenomena. Ranked, sourced, and highly classified until proven otherwise." />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Homepage-specific styles for the hero section -->
+  <style>
+    /* ---- Hero Section ---- */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+    }
+
+    .hero-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1.8rem, 6vw, 3.5rem); /* Responsive large title */
+      color: var(--green);
+      text-shadow:
+        0 0 10px var(--green),
+        0 0 30px rgba(60,122,24,0.6),
+        0 0 60px rgba(60,122,24,0.3);
+      letter-spacing: 4px;
+      margin-bottom: 1.5rem;
+      animation: flicker-title 6s infinite;
+    }
+
+    /* Subtle glow flicker on the main title */
+    @keyframes flicker-title {
+      0%, 95%, 100% { text-shadow: 0 0 10px var(--green), 0 0 30px rgba(60,122,24,0.6), 0 0 60px rgba(60,122,24,0.3); }
+      96%  { text-shadow: 0 0 4px var(--green), 0 0 10px rgba(60,122,24,0.2); }
+      97%  { text-shadow: 0 0 10px var(--green), 0 0 30px rgba(60,122,24,0.6), 0 0 60px rgba(60,122,24,0.3); }
+      98%  { text-shadow: none; }
+      99%  { text-shadow: 0 0 10px var(--green), 0 0 30px rgba(60,122,24,0.6), 0 0 60px rgba(60,122,24,0.3); }
+    }
+
+    .hero-sub {
+      font-family: 'VT323', monospace;
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* ---- Featured File section ---- */
+    .featured-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: var(--green);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .featured-label::before,
+    .featured-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .featured-card {
+      border: 2px solid var(--green);
+      background: var(--card-bg);
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(60,122,24,0.15);
+    }
+
+    .featured-card h2 {
+      font-size: 0.85rem;
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    .featured-card .sub-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Star field canvas (sits behind everything) -->
+  <canvas id="starfield"></canvas>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <!-- To mark a different page as active, add class="active" to that link -->
+  <div id="page-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">ENCRYPTID</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="rankings.html">Rankings</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="articles.html">Articles</a>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <h1 class="hero-title">ENCRYPTID</h1>
+      <p class="hero-sub">
+        Cryptids, conspiracies, and other supernatural phenomena.<br>
+        Ranked, sourced, and highly classified until proven otherwise.
+      </p>
+    </section>
+
+    <!-- ===================== FEATURED FILE ===================== -->
+    <!--
+      HOW TO UPDATE THE FEATURED ARTICLE:
+      1. Change the h2 title, sub-title, date, and excerpt text below
+      2. Update the href on the "Read More" link to point to the new article file
+      That's it!
+    -->
+    <section>
+      <p class="featured-label">Featured File</p>
+
+      <article class="featured-card">
+        <span class="meta-tag">[ CASE FILE ]</span>
+        <h2>York: Haunted or Hoax?</h2>
+        <span class="sub-title">Is York truly "The most haunted city in the world?"</span>
+        <p class="card-date" style="font-size:0.95rem; color:var(--text-dim); margin-bottom:1rem; font-family:'Inconsolata',monospace;">
+          April 5th, 2026
+        </p>
+        <p>
+          When scouring the internet about the topic of ghosts, there was one UK city which came up more than
+          any other when it comes to hauntings. York has attained a fearsome reputation as the most haunted
+          city in the world — but I wasn't satisfied. The deeper I dug, the more the cracks began to show.
+        </p>
+        <p>
+          Stories about ghosts have peppered my social interactions since I was a child, and even then I never
+          found that I put much stock in the ravings of my peers when they heard something go bump in the night.
+          It seemed to me that there was more to this infamy than meets the eye.
+        </p>
+        <a href="articles/york-haunted-or-hoax.html" class="read-more">▶ READ FILE</a>
+      </article>
+    </section>
+
+  </div><!-- end #page-wrapper -->
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <p>
+      &copy; 2026 Encryptid &mdash; <a href="https://encryptid.co.uk">encryptid.co.uk</a>
+      &nbsp;|&nbsp; Keep it cryptid.
+    </p>
+  </footer>
+
+  <!-- Star field script -->
+  <script src="js/starfield.js"></script>
+</body>
+</html>
