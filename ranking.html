@@ -4,671 +4,246 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rankings — Encryptid</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inconsolata:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="The Encryptid ranking system explained — how claims are rated for veracity, supernature, and overall credibility." />
+  <link rel="stylesheet" href="css/style.css" />
+
   <style>
-    :root {
-      --bg:        #0E0C22;
-      --bg-card:   #15122E;
-      --blue:      #3355EE;
-      --blue-dim:  #1F3399;
-      --purple:    #6633AA;
-      --purple-dim:#3D1F66;
-      --white:     #E8E8FF;
-      --dim:       #8888BB;
-      --border:    #2A2550;
-      --gold:      #FFD700;
-      --green:     #00FF88;
-      --red:       #FF3355;
-      --orange:    #FF8833;
-      --grey:      #555577;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inconsolata', monospace;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      cursor: crosshair;
-    }
-
-    #starfield {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg, transparent, transparent 2px,
-        rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
-      );
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .site-wrap { position: relative; z-index: 2; }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 48px;
-      border-bottom: 2px solid var(--border);
-      background: rgba(14,12,34,0.92);
-      backdrop-filter: blur(6px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-
-    .logo-pixel { width: 40px; height: 32px; position: relative; flex-shrink: 0; }
-    .logo-pixel::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 40px; height: 26px;
-      background: var(--blue);
-      box-shadow: -2px -2px 0 var(--purple-dim), 2px 2px 0 var(--blue-dim), inset -2px -2px 0 var(--blue-dim);
-    }
-    .logo-pixel::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 2px;
-      width: 16px; height: 8px;
-      background: var(--blue);
-      clip-path: polygon(0 100%, 0 40%, 30% 0, 100% 0, 100% 100%);
-    }
-
-    .logo-text {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 14px;
-      color: var(--white);
-      letter-spacing: 1px;
-      text-shadow: 0 0 12px rgba(51,85,238,0.8), 2px 2px 0 var(--purple-dim);
-    }
-
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-
-    .nav-links a {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
-      color: var(--dim);
-      text-decoration: none;
-      letter-spacing: 1px;
-      transition: color 0.2s;
-      padding: 4px 0;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: var(--blue);
-      transition: width 0.2s;
-    }
-    .nav-links a:hover { color: var(--blue); text-shadow: 0 0 10px rgba(51,85,238,0.9); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--white); }
-    .nav-links a.active::after { width: 100%; }
-
-    .nav-admin {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--purple);
-      text-decoration: none;
-      border: 1px solid var(--purple-dim);
-      padding: 7px 12px;
-      transition: all 0.2s;
-    }
-    .nav-admin:hover { background: var(--purple-dim); color: var(--white); box-shadow: 0 0 12px rgba(102,51,170,0.6); }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 72px 48px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .page-eyebrow {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--purple);
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-    }
-
-    .page-title {
-      font-family: 'Press Start 2P', monospace;
-      font-size: clamp(18px, 3vw, 34px);
-      line-height: 1.6;
-      color: var(--white);
-      text-shadow: 0 0 20px rgba(51,85,238,0.6), 4px 4px 0 var(--purple-dim);
-      margin-bottom: 16px;
-    }
-
-    .page-title span { color: var(--blue); }
-    .page-divider {
-      width: 80px; height: 2px;
-      background: linear-gradient(90deg, var(--blue), var(--purple), transparent);
-      margin-top: 24px;
-    }
-
-    /* ── CONTENT ── */
-    .content-area {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px 80px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .section-title {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 11px;
-      color: var(--white);
-      letter-spacing: 2px;
-      white-space: nowrap;
-    }
-
-    .section-line {
-      flex: 1; height: 1px;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
-
-    .section-tag {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--blue);
-      border: 1px solid var(--blue-dim);
-      padding: 4px 8px;
-      white-space: nowrap;
-    }
-
-    /* ── INTRO BLOCK ── */
-    .intro-block {
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-left: 4px solid var(--blue);
-      padding: 40px 48px;
-      margin-bottom: 60px;
-      animation: fadeUp 0.8s 0.1s ease both;
-    }
-
-    .intro-block p {
-      font-family: 'VT323', monospace;
-      font-size: 22px;
-      color: var(--dim);
-      line-height: 1.7;
-      margin-bottom: 20px;
-      max-width: 860px;
-    }
-
-    .intro-block p:last-child { margin-bottom: 0; }
-
-    .intro-block p strong {
-      color: var(--white);
-      font-family: 'VT323', monospace;
-      font-weight: normal;
-    }
-
-    /* ── NUMERIC CATEGORIES ── */
-    .numeric-grid {
+    /* ---- Rank Grade Cards ---- */
+    .grade-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 60px;
-      animation: fadeUp 0.8s 0.2s ease both;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
 
-    .numeric-card {
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.25s, box-shadow 0.25s;
+    .grade-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      padding: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .numeric-card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 0 24px rgba(51,85,238,0.15);
+    .grade-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 0 10px rgba(60,122,24,0.2);
     }
 
-    .numeric-card::after {
-      content: '';
-      position: absolute;
-      top: 4px; right: 4px;
-      width: 6px; height: 6px;
-      background: var(--blue);
-      opacity: 0.5;
-    }
-
-    .numeric-card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      gap: 16px;
-    }
-
-    .numeric-card h2 {
+    .grade-letter {
       font-family: 'Press Start 2P', monospace;
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 2px;
-      line-height: 1.8;
-    }
-
-    .pip-demo {
-      display: flex;
-      gap: 5px;
-      flex-shrink: 0;
-      align-items: center;
-    }
-
-    .pip {
-      width: 12px; height: 12px;
-      background: var(--border);
-      image-rendering: pixelated;
-      flex-shrink: 0;
-    }
-
-    .pip.filled {
-      background: var(--blue);
-      box-shadow: 0 0 6px rgba(51,85,238,0.7);
-    }
-
-    .numeric-card p {
-      font-family: 'VT323', monospace;
-      font-size: 21px;
-      color: var(--dim);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .numeric-card p:last-child { margin-bottom: 0; }
-
-    .rating-label {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--purple);
-      letter-spacing: 2px;
-      margin-top: 20px;
+      font-size: 2rem;
+      color: var(--green);
+      text-shadow: 0 0 12px rgba(60,122,24,0.5);
       display: block;
+      margin-bottom: 0.5rem;
     }
-
-    /* ── FOOTNOTE ── */
-    .footnote-block {
-      background: rgba(102,51,170,0.08);
-      border: 1px solid var(--purple-dim);
-      border-left: 3px solid var(--purple);
-      padding: 24px 32px;
-      margin-top: 24px;
-    }
-
-    .footnote-block p {
-      font-family: 'VT323', monospace;
-      font-size: 19px;
-      color: var(--dim);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .footnote-block p::before {
-      content: '* ';
-      color: var(--purple);
-      font-family: 'Press Start 2P', monospace;
-      font-size: 10px;
-    }
-
-    /* ── OVERALL GRADES TABLE ── */
-    .grades-block {
-      margin-bottom: 60px;
-      animation: fadeUp 0.8s 0.3s ease both;
-    }
-
-    .grade-row {
-      display: grid;
-      grid-template-columns: 80px 160px 1fr;
-      align-items: center;
-      gap: 24px;
-      padding: 24px 32px;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-bottom: none;
-      transition: background 0.2s;
-    }
-
-    .grade-row:first-of-type { border-top: 2px solid var(--border); }
-    .grade-row:last-of-type  { border-bottom: 2px solid var(--border); }
-    .grade-row:hover { background: rgba(255,255,255,0.02); }
-
-    .grade-badge {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 28px;
-      text-align: center;
-      padding: 10px;
-      border: 2px solid;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px; height: 64px;
-    }
-
-    .grade-s { color: var(--gold);   border-color: var(--gold);   box-shadow: 0 0 14px rgba(255,215,0,0.35); }
-    .grade-a { color: var(--green);  border-color: var(--green);  box-shadow: 0 0 14px rgba(0,255,136,0.35); }
-    .grade-b { color: var(--blue);   border-color: var(--blue);   box-shadow: 0 0 14px rgba(51,85,238,0.35); }
-    .grade-c { color: var(--white);  border-color: var(--dim); }
-    .grade-d { color: var(--orange); border-color: var(--orange); box-shadow: 0 0 14px rgba(255,136,51,0.35); }
-    .grade-u { color: var(--red);    border-color: var(--red);    box-shadow: 0 0 14px rgba(255,51,85,0.35); }
 
     .grade-label {
       font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
-      line-height: 1.9;
-    }
-
-    .grade-s .grade-label { color: var(--gold); }
-    .grade-a .grade-label,
-    .grade-b .grade-label,
-    .grade-c .grade-label,
-    .grade-d .grade-label { color: var(--white); }
-    .grade-u .grade-label { color: var(--red); }
-
-    .grade-label span {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
       display: block;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--dim);
-      margin-top: 4px;
     }
 
     .grade-desc {
-      font-family: 'VT323', monospace;
-      font-size: 20px;
-      color: var(--dim);
-      line-height: 1.5;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin: 0;
     }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 2px solid var(--border);
-      padding: 40px 48px;
+    /* ---- Score bars ---- */
+    .score-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: rgba(10,8,24,0.8);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
     }
 
-    .footer-logo {
+    .score-label {
       font-family: 'Press Start 2P', monospace;
-      font-size: 10px;
-      color: var(--white);
-      text-shadow: 0 0 10px rgba(51,85,238,0.6);
+      font-size: 0.5rem;
+      color: var(--green);
+      min-width: 110px;
     }
 
-    .footer-copy {
-      font-family: 'VT323', monospace;
-      font-size: 16px;
-      color: var(--grey);
+    .score-bar {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      position: relative;
+      min-width: 100px;
     }
 
-    .footer-links { display: flex; gap: 24px; list-style: none; }
-
-    .footer-links a {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: var(--dim);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--blue); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .score-bar-fill {
+      height: 100%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
     }
 
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--blue-dim); border: 2px solid var(--bg); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
-    ::selection { background: var(--blue); color: var(--white); }
+    .score-range {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
 
-<canvas id="starfield"></canvas>
+  <canvas id="starfield"></canvas>
 
-<div class="site-wrap">
+  <div id="page-wrapper">
 
-  <!-- ── NAV ── -->
-  <nav>
-    <a href="/index.html" class="nav-logo">
-      <div class="logo-pixel"></div>
-      <span class="logo-text">ENCRYPTID</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/about.html">ABOUT</a></li>
-      <li><a href="/ranking.html" class="active">RANKING</a></li>
-      <li><a href="/methodology.html">METHODOLOGY</a></li>
-      <li><a href="/articles.html/">ARTICLES</a></li>
-    </ul>
-    <a href="/admin/" class="nav-admin">▌ ADMIN</a>
-  </nav>
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav>
+      <a href="index.html" class="nav-logo">ENCRYPTID</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rankings.html" class="active">Rankings</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="articles.html">Articles</a>
+    </nav>
 
-  <!-- ── PAGE HEADER ── -->
-  <header class="page-header">
-    <p class="page-eyebrow">// FILE: RANKING — CLEARANCE LEVEL: PUBLIC</p>
-    <h1 class="page-title">THE RANKING <span>SYSTEM</span>, EXPLAINED</h1>
-    <div class="page-divider"></div>
-  </header>
+    <!-- ===================== PAGE CONTENT ===================== -->
+    <div class="content">
 
-  <!-- ── CONTENT ── -->
-  <main class="content-area">
+      <span class="meta-tag">[ RANKING SYSTEM ]</span>
+      <h1>The Ranking System, Explained</h1>
 
-    <!-- Intro -->
-    <div class="section-header">
-      <span class="section-title">EDITORIAL POSITION</span>
-      <div class="section-line"></div>
-      <span class="section-tag">A NOTE ON HONESTY</span>
-    </div>
+      <p>
+        I will always attempt to be honest and accountable when sharing my opinion on the veracity
+        of the claims on this website, and anything ranked higher than a <strong>5/10</strong>
+        indicates that I, the writer, believe in the theory myself.
+      </p>
 
-    <div class="intro-block">
-      <p>I will always attempt to be <strong>honest and accountable</strong> when sharing my opinion on the veracity of the claims on this website. Though higher ranks do indicate a stronger standard of proof, these should <strong>not</strong> be taken as empyrical evidence of a claims existence.</p>
-      <p>This ranking system is <strong>not to be taken as an absolute measure</strong> for which the reader should base their own beliefs. It is intended to be a guide with which you can decide for yourself whether or not you believe in the theories posited on Encryptid.</p>
-    </div>
+      <p>
+        This ranking system is <strong>not</strong> to be taken as an absolute measure for which
+        the reader should base their own beliefs. It is intended to be a guide with which you can
+        decide for yourself whether or not you believe in the theories posited on Encryptid.
+      </p>
 
-    <!-- Numeric Rankings -->
-    <div class="section-header">
-      <span class="section-title">RANKING CATEGORIES</span>
-      <div class="section-line"></div>
-      <span class="section-tag">SCORED 1 – 5</span>
-    </div>
+      <hr />
 
-    <div class="numeric-grid">
+      <!-- ---- RANKING CATEGORIES ---- -->
+      <h2>Ranking Categories</h2>
 
-      <div class="numeric-card">
-        <div class="numeric-card-header">
-          <h2>// VERACITY</h2>
-          <div class="pip-demo">
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-          </div>
+      <!-- Veracity -->
+      <h3>Veracity</h3>
+      <p>
+        How much of the claim relies on fact? How many reliable sources can back it up?
+      </p>
+      <div class="score-row">
+        <span class="score-label">VERACITY</span>
+        <div class="score-bar">
+          <div class="score-bar-fill" style="width: 100%;"></div>
         </div>
-        <p>How much of the claim relies on fact? How many reliable sources can back it up?</p>
-        <span class="rating-label">▸ RATED FROM 1 TO 5</span>
+        <span class="score-range">Rated 1 – 5</span>
       </div>
 
-      <div class="numeric-card">
-        <div class="numeric-card-header">
-          <h2>// SUPERNATURE</h2>
-          <div class="pip-demo">
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-            <div class="pip filled"></div>
-          </div>
+      <!-- Supernature -->
+      <h3>Supernature</h3>
+      <p>
+        Does the claim contain elements that can't be explained by science? Is it beyond our modern
+        understanding of the laws of nature?
+      </p>
+      <div class="score-row">
+        <span class="score-label">SUPERNATURE</span>
+        <div class="score-bar">
+          <div class="score-bar-fill" style="width: 100%;"></div>
         </div>
-        <p>Does the claim contain elements that can't be explained by science? Is it beyond our modern understanding of the laws of nature?</p>
-        <span class="rating-label">▸ RATED FROM 1 TO 5</span>
+        <span class="score-range">Rated 1 – 5</span>
       </div>
 
-    </div>
+      <p style="font-size:1.05rem; font-family:'Inconsolata',monospace; color:var(--text-dim); border-left: 3px solid var(--border); padding-left: 1rem; margin-top: 0.5rem;">
+        * It should be noted, the Supernature ranking does not in and of itself denote that the claim
+        should be received with any less veracity. Scientific discoveries are borne out of the
+        observation of natural phenomena, and just because something cannot yet be explained by
+        science does not mean that it hasn't occurred.
+      </p>
 
-    <!-- Supernature footnote -->
-    <div class="footnote-block" style="margin-top: -36px; margin-bottom: 60px; animation: fadeUp 0.8s 0.25s ease both;">
-      <p>It should be noted — the Supernature ranking does not in and of itself denote that the claim should be received with any less veracity. Scientific discoveries are borne out of the observation of natural phenomena, and just because something cannot yet be explained by science does not mean that it hasn't occurred.</p>
-    </div>
+      <hr />
 
-    <!-- Overall Grades -->
-    <div class="section-header">
-      <span class="section-title">OVERALL GRADE</span>
-      <div class="section-line"></div>
-      <span class="section-tag">SUMMARY RANKING</span>
-    </div>
+      <!-- ---- OVERALL GRADES ---- -->
+      <h2>Overall Grade</h2>
+      <p>
+        The summary rank on how accurate the writer finds these claims.
+      </p>
 
-    <div class="grades-block">
+      <!--
+        HOW TO ADD A NEW GRADE:
+        Copy one .grade-card block below, paste it inside .grade-grid,
+        and update the letter, label, and description.
+      -->
+      <div class="grade-grid">
 
-      <div class="grade-row">
-        <div class="grade-badge grade-s">S</div>
-        <div class="grade-label">
-          OUTSTANDING
-          <span>STRONG AND EVIDENCE-BASED</span>
+        <div class="grade-card">
+          <span class="grade-letter">S</span>
+          <span class="grade-label">OUTSTANDING</span>
+          <p class="grade-desc">
+            Significant evidentiary support. The author considers this claim to be ostensibly true.
+          </p>
         </div>
-        <p class="grade-desc">Significant evidentiary support. The author considers this claim to be ostensibly true.</p>
-      </div>
 
-      <div class="grade-row">
-        <div class="grade-badge grade-a">A</div>
-        <div class="grade-label">
-          ACCEPTABLE
-          <span>SOLID BUT INCOMPLETE</span>
+        <div class="grade-card">
+          <span class="grade-letter">A</span>
+          <span class="grade-label">ACCEPTABLE</span>
+          <p class="grade-desc">
+            Solid evidence exists, but minor gaps in information mean that further questions still
+            need to be asked.
+          </p>
         </div>
-        <p class="grade-desc">Solid evidence exists, but minor gaps in information mean that further questions still need to be asked.</p>
-      </div>
 
-      <div class="grade-row">
-        <div class="grade-badge grade-b">B</div>
-        <div class="grade-label">
-          STANDARD
-          <span>FLAWED BUT PRESENT</span>
+        <div class="grade-card">
+          <span class="grade-letter">B</span>
+          <span class="grade-label">STANDARD</span>
+          <p class="grade-desc">
+            Evidence is present, but multiple significant flaws and gaps mean that it should not
+            be considered reliable.
+          </p>
         </div>
-        <p class="grade-desc">Evidence is present, but multiple significant flaws and gaps mean that it should not be considered reliable.</p>
-      </div>
 
-      <div class="grade-row">
-        <div class="grade-badge grade-c">C</div>
-        <div class="grade-label">
-          AVERAGE
-          <span>THIN EVIDENCE</span>
+        <div class="grade-card">
+          <span class="grade-letter">C</span>
+          <span class="grade-label">AVERAGE</span>
+          <p class="grade-desc">
+            Unsubstantiated evidence holds this claim together by a thread, and few verifiable
+            sources are able to maintain it.
+          </p>
         </div>
-        <p class="grade-desc">Unsubstantiated evidence holds this claim together by a thread, and few verifiable sources are able to maintain it.</p>
-      </div>
 
-      <div class="grade-row">
-        <div class="grade-badge grade-d">D</div>
-        <div class="grade-label">
-          WEAK
-          <span>HEAVILY COMPROMISED</span>
+        <div class="grade-card">
+          <span class="grade-letter">D</span>
+          <span class="grade-label">WEAK</span>
+          <p class="grade-desc">
+            Claim is significantly stymied by disinformation and hoaxes, whether intentionally
+            or unintentionally.
+          </p>
         </div>
-        <p class="grade-desc">Claim is significantly stymied by disinformation and hoaxes, whether intentionally or unintentionally.</p>
-      </div>
 
-      <div class="grade-row">
-        <div class="grade-badge grade-u">U</div>
-        <div class="grade-label">
-          UNCLASSIFIED
-          <span>ACTIVELY HARMFUL</span>
+        <div class="grade-card">
+          <span class="grade-letter">U</span>
+          <span class="grade-label">UNCLASSIFIED</span>
+          <p class="grade-desc">
+            Actively and intentionally harmful claims that are deliberately made to stir up
+            civil unrest.
+          </p>
         </div>
-        <p class="grade-desc">Actively and intentionally harmful claims that are deliberately made to stir up civil unrest.</p>
-      </div>
 
-    </div>
+      </div><!-- end .grade-grid -->
 
-  </main>
+    </div><!-- end .content -->
 
-  <!-- ── FOOTER ── -->
+  </div><!-- end #page-wrapper -->
+
   <footer>
-    <span class="footer-logo">ENCRYPTID</span>
-    <span class="footer-copy">© 2025 Encryptid. All files classified until proven otherwise.</span>
-    <ul class="footer-links">
-      <li><a href="/about.html">ABOUT</a></li>
-      <li><a href="/contact.html">CONTACT</a></li>
-      <li><a href="/ranking.html">RANKINGS</a></li>
-    </ul>
+    <p>
+      &copy; 2026 Encryptid &mdash; <a href="https://encryptid.co.uk">encryptid.co.uk</a>
+      &nbsp;|&nbsp; Keep it cryptid.
+    </p>
   </footer>
 
-</div>
-
-<script>
-  const canvas = document.getElementById('starfield');
-  const ctx    = canvas.getContext('2d');
-
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const stars = Array.from({ length: 70 }, () => {
-    const flicker = Math.random() < 0.14;
-    return {
-      x: Math.random(), y: Math.random(),
-      size: Math.random() < 0.15 ? 2 : 1,
-      opacity: 0.4 + Math.random() * 0.6,
-      flicker,
-      fTarget:  flicker ? 0.5 + Math.random() * 0.5 : null,
-      fCurrent: flicker ? 0.4 + Math.random() * 0.6 : null,
-      fSpeed:   flicker ? 0.002 + Math.random() * 0.004 : null,
-    };
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (const s of stars) {
-      let alpha = s.opacity;
-      if (s.flicker) {
-        const diff = s.fTarget - s.fCurrent;
-        s.fCurrent += diff * s.fSpeed * 60 * (1/60);
-        if (Math.abs(diff) < 0.01) s.fTarget = 0.5 + Math.random() * 0.5;
-        alpha = s.fCurrent;
-      }
-      ctx.fillStyle = `rgba(232, 232, 255, ${alpha})`;
-      ctx.fillRect(Math.floor(s.x * canvas.width), Math.floor(s.y * canvas.height), s.size, s.size);
-    }
-    requestAnimationFrame(draw);
-  }
-
-  requestAnimationFrame(draw);
-</script>
-
+  <script src="js/starfield.js"></script>
 </body>
 </html>
