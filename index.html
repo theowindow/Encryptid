@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encryptid</title>
+  <meta name="description" content="Cryptids, conspiracies, and other supernatural phenomena — investigated with a rational lens.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Favicon: replace with your own if desired -->
+  <link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVIGATION
+       To add a new page to the nav, copy one of the <li>
+       items below and update the href and link text.
+       ===================================================== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Encryptid logo">
+        Encryptid
+      </a>
+
+      <!-- Mobile toggle button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="articles.html">Articles</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       HERO SECTION
+       To change the main title or subtitle, edit below.
+       ===================================================== -->
+  <section class="hero">
+    <h1 class="hero-title">Encryptid</h1>
+    <p class="hero-subtitle">Cryptids, conspiracies, and other supernatural phenomena.</p>
+
+    <div class="hero-divider"></div>
+
+    <!-- =====================================================
+         FEATURED ARTICLE
+         To change the featured article, update the href on
+         the <a> tag, and edit the title, subtitle, date,
+         and excerpt paragraph below.
+         ===================================================== -->
+    <p class="hero-featured-label">Featured Article</p>
+
+    <a href="york-haunted-or-hoax.html" class="featured-card">
+      <p class="article-meta">April 5, 2026 &nbsp;·&nbsp; Ghosts &amp; Hauntings</p>
+      <h2>York: Haunted or Hoax?</h2>
+      <h3>Is York truly "The most haunted city in the world?"</h3>
+      <p>
+        When scouring the internet about the topic of ghosts, there was one UK city which came up
+        more than any other when it comes to hauntings. York has attained a fearsome reputation as
+        the most haunted city in the world, according to a litany of tourist sites. But I wasn't satisfied.
+      </p>
+      <span class="read-more">Read the article</span>
+    </a>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer>
+    <p>&copy; 2026 <a href="index.html">Encryptid</a> &nbsp;·&nbsp; <a href="encryptid.co.uk">encryptid.co.uk</a></p>
+  </footer>
+
+  <!-- Mobile nav toggle script -->
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
