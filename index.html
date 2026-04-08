@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encryptid</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Favicon: save a square version of your logo as favicon.ico in the repo root -->
+  <link rel="icon" href="images/Encryptid_NewLogo.png" type="image/png">
+</head>
+<body>
+
+  <!-- Starfield canvas — sits behind everything -->
+  <canvas id="starfield"></canvas>
+
+  <!-- ===================== NAVIGATION =====================
+       The nav is identical on every page.
+       The only difference is the class="active" on the
+       current page's link (or none on the homepage).
+       ===================================================== -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/Encryptid_NewLogo.png" alt="Encryptid home">
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="methodology.html">Methodology</a></li>
+      <li><a href="articles.html">Articles</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO =========================== -->
+  <div class="page-wrapper">
+    <section class="home-hero">
+
+      <!-- EDIT: Change the main title text here -->
+      <h1 class="home-title">Encryptid</h1>
+
+      <!-- EDIT: Change the subtitle text here -->
+      <p class="home-subtitle">
+        Cryptids, conspiracies, and other supernatural phenomena.<br>
+        Ranked, sourced, and highly classified until proven otherwise.
+      </p>
+
+      <!-- ===================== FEATURED FILE ==============
+           EDIT: Update this card whenever you want a new
+           featured article on the homepage.
+           Change: h2 title, .article-date, the excerpt <p>,
+           and the href on the button to point to your article.
+           =================================================== -->
+      <div class="featured-file">
+        <h2>York, Haunted or Hoax?</h2>
+        <span class="article-date">April 5th, 2026</span>
+        <p>
+          When scouring the internet about the topic of ghosts, there was one UK city
+          which came up more than any other when it comes to hauntings. York has attained
+          a fearsome reputation as the most haunted city in the world, according to a
+          litany of tourist sites — but I wasn't satisfied.
+        </p>
+        <a href="york.html" class="btn">Read More &gt;&gt;</a>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- ===================== FOOTER ========================= -->
+  <footer>
+    &copy; 2026 Encryptid &mdash; encryptid.co.uk &mdash; Keep it cryptid.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

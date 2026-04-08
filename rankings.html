@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rankings — Encryptid</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/Encryptid_NewLogo.png" type="image/png">
+</head>
+<body>
+
+  <canvas id="starfield"></canvas>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/Encryptid_NewLogo.png" alt="Encryptid home">
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="rankings.html" class="active">Rankings</a></li>
+      <li><a href="methodology.html">Methodology</a></li>
+      <li><a href="articles.html">Articles</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="page-content">
+
+      <h1>The Ranking System, Explained</h1>
+
+      <p class="page-intro">
+        I will always attempt to be honest and accountable when sharing my opinion on the
+        veracity of the claims on this website. Anything ranked higher than a 5/10 indicates
+        that I, the writer, believe in the theory myself.
+      </p>
+
+      <p>
+        This ranking system is not to be taken as an absolute measure for which the reader
+        should base their own beliefs. It is intended to be a guide with which you can decide
+        for yourself whether or not you believe in the theories posited on Encryptid.
+      </p>
+
+      <hr class="divider">
+
+      <!-- ============== RANKING CATEGORIES =============== -->
+      <h2>Ranking Categories</h2>
+
+      <div class="rank-card">
+        <h3>Veracity &mdash; rated 1 to 5</h3>
+        <p class="rank-desc">
+          How much of the claim relies on fact? How many reliable sources can back it up?
+        </p>
+      </div>
+
+      <div class="rank-card">
+        <h3>Supernature &mdash; rated 1 to 5</h3>
+        <p class="rank-desc">
+          Does the claim contain elements that can't be explained by science? Is it beyond
+          our modern understanding of the laws of nature?
+        </p>
+        <p class="rank-desc" style="margin-top:0.8rem; font-size:1.1rem; color:var(--dim);">
+          * It should be noted: the Supernature ranking does not in and of itself denote that
+          the claim should be received with any less veracity. Scientific discoveries are borne
+          out of the observation of natural phenomena, and just because something cannot yet be
+          explained by science does not mean that it hasn't occurred.
+        </p>
+      </div>
+
+      <div class="rank-card">
+        <h3>Overall Grade</h3>
+        <p class="rank-desc" style="margin-bottom:1rem;">
+          The summary rank on how accurate the writer finds these claims:
+        </p>
+
+        <table class="grade-table">
+          <thead>
+            <tr>
+              <th>Grade</th>
+              <th>Label</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>S</td>
+              <td>Outstanding</td>
+              <td>Significant evidentiary support. Author considers this claim to be ostensibly true.</td>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>Acceptable</td>
+              <td>Solid evidence exists, but minor gaps in information mean that further questions still need to be asked.</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>Standard</td>
+              <td>Evidence is present, but multiple significant flaws and gaps mean it should not be considered reliable.</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>Average</td>
+              <td>Unsubstantiated evidence holds this claim together by a thread, and few verifiable sources are able to maintain it.</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>Weak</td>
+              <td>Claim is significantly stymied by disinformation and hoaxes, whether intentionally or unintentionally.</td>
+            </tr>
+            <tr>
+              <td>U</td>
+              <td>Unclassified</td>
+              <td>Actively and intentionally harmful claims that are deliberately made to stir up civil unrest.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Encryptid &mdash; encryptid.co.uk &mdash; Keep it cryptid.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
